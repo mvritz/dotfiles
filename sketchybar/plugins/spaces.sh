@@ -5,7 +5,6 @@ source "$HOME/.config/sketchybar/icons.sh"
 
 SPACE_ICONS=("$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST")
 CURRENT_SPACE_ICONS=("$WORK" "$BROWSER" "$MUSIC" "$UNI" "$MAIL" "$GENERAL" "$GENERAL" "$GENERAL" "$GENERAL")
-SUPPOSED=("iTerm2 | idea | vscode | Electron" "SigmaOS" "Spotify" "GoodNotes" "Mail" "any" "any" "any" "any")
 ACTIVE_SPACE=$(yabai -m query --spaces --space | jq '.index')
 CURRENT_APP_IN_SPACE=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true')
 
@@ -27,18 +26,6 @@ space_popup=(
 sketchybar --add item space.popup popup.current_space \
   --set space.popup "${space_popup[@]}"
 
-supposed=(
-  icon.padding_left=10
-  label.font="SF Pro:Bold:12.0"
-  label.padding_left=10
-  label.padding_right=10
-  blur_radius=100
-  sticky=on
-)
-
-sketchybar --add item space.supposed popup.current_space \
-  --set space.supposed "${supposed[@]}"
-
 for i in "${!SPACE_ICONS[@]}"; do
   sid=$(($i + 1))
 
@@ -53,8 +40,5 @@ for i in "${!SPACE_ICONS[@]}"; do
   sketchybar --set space.$sid icon="$CURRENT_ICON"
   sketchybar --set current_space icon=${CURRENT_SPACE_ICONS[$(($ACTIVE_SPACE - 1))]}
   sketchybar --set space.popup label="$CURRENT_APP_IN_SPACE" \
-    icon=${CURRENT_SPACE_ICONS[$(($ACTIVE_SPACE - 1))]}
-
-  sketchybar --set space.supposed label="${SUPPOSED[$(($ACTIVE_SPACE - 1))]}" \
     icon=${CURRENT_SPACE_ICONS[$(($ACTIVE_SPACE - 1))]}
 done

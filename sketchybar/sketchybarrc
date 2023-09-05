@@ -163,7 +163,7 @@ spotify=(
   click_script="$POPUP_CLICK_SCRIPT"
   popup.horizontal=on
   popup.align=center
-  popup.height=150
+  popup.height=100
   icon=$SPOTIFY
   icon.padding_right=15
   icon.padding_left=15
@@ -172,7 +172,8 @@ spotify=(
   background.corner_radius=10
   background.padding_left=3
   background.padding_right=3
-  script="$PLUGIN_DIR/spotify_t.sh"
+  script="$PLUGIN_DIR/spotify.sh"
+  update_freq=5
 )
 
 sketchybar --add event spotify_change $SPOTIFY_EVENT \
@@ -186,7 +187,8 @@ spotify_label=(
   label.padding_left=10
   label.padding_right=15
   label.font="SF Pro:Bold:9.0"
-  script="$PLUGIN_DIR/spotify_t.sh"
+  script="$PLUGIN_DIR/spotify.sh"
+  update_freq=5
 )
 
 sketchybar --add item spotify_label e \
