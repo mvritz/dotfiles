@@ -1,40 +1,62 @@
-alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
+# open a terminal
+cmd - return :open -n -a iterm2
 
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
+# navigating spaces
+cmd - 1 : yabai -m space --focus 1 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)"
+cmd - 2 : yabai -m space --focus 2 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)"
+cmd - 3 : yabai -m space --focus 3 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)"
+cmd - 4 : yabai -m space --focus 4 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)"
+cmd - 5 : yabai -m space --focus 5 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)" 
+cmd - 6 : yabai -m space --focus 6 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)" 
+cmd - 7 : yabai -m space --focus 7 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)"
+cmd - 8 : yabai -m space --focus 8 && yabai -m window --focus "$(yabai -m query --windows --space | jq .[0].id)" 
+cmd - 9 : yabai -m space --focus 9
+cmd - 0 : yabai -m space --focus 10
 
-shift + alt - h : yabai -m window --warp west
-shift + alt - j : yabai -m window --warp south
-shift + alt - k : yabai -m window --warp north
-shift + alt - l : yabai -m window --warp east
+# navigating displays
+alt - 1 : yabai -m display --focus 1
+alt - 2 : yabai -m display --focus 2
 
-shift + alt - m : yabai -m window --space last; yabai -m space --focus last
-shift + alt - p : yabai -m window --space prev; yabai -m space --focus prev
-shift + alt - n : yabai -m window --space next; yabai -m space --focus next
+# window focus navigation
+cmd - h : yabai -m window --focus west
+cmd - j : yabai -m window --focus south
+cmd - k : yabai -m window --focus north
+cmd - l : yabai -m window --focus east
 
-for i in {1..4}; do
-    shift + alt - $i : yabai -m window --space $i; yabai -m space --focus $i
-done
+# old window focus navigation
+# cmd - j : yabai -m window --focus next || yabai -m window --focus first
+# cmd - k : yabai -m window --focus prev || yabai -m window --focus last
 
-lctrl + alt - h : yabai -m window --resize left:-50:0; yabai -m window --resize right:-50:0
-lctrl + alt - j : yabai -m window --resize bottom:0:50; yabai -m window --resize top:0:50
-lctrl + alt - k : yabai -m window --resize top:0:-50; yabai -m window --resize bottom:0:-50
-lctrl + alt - l : yabai -m window --resize right:50:0; yabai -m window --resize left:50:0
+# Resize windows
+alt - h : yabai -m window --resize left:-50:0 ; yabai -m window --resize right:-50:0
+alt - j : yabai -m window --resize bottom:0:50 ; yabai -m window --resize top:0:50
+alt - k : yabai -m window --resize top:0:-50 ; yabai -m window --resize bottom:0:-50
+alt - l : yabai -m window --resize right:50:0 ; yabai -m window --resize left:50:0
 
-lctrl + alt - e : yabai -m space --balance
-lctrl + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
-alt - r         : yabai -m space --rotate 270
-shift + alt - r : yabai -m space --rotate 90
-shift + alt - x : yabai -m space --mirror x-axis
-shift + alt - y : yabai -m space --mirror y-axis
+# moving windows
+cmd + shift - k : yabai -m window --swap north
+cmd + shift - l : yabai -m window --swap east
+cmd + shift - j : yabai -m window --swap south
+cmd + shift - h : yabai -m window --swap west
 
-for dir in h j k l; do
-    shift + lctrl + alt - $dir : yabai -m window --insert ${dir:0:1}
-done
+# throw focused window to space // might potentially change this to alt at some point
+cmd + shift - 1 : yabai -m window --space 1; yabai -m space --focus 1
+cmd + shift - 2 : yabai -m window --space 2; yabai -m space --focus 2
+cmd + shift - 3 : yabai -m window --space 3; yabai -m space --focus 3
+cmd + shift - 4 : yabai -m window --space 4; yabai -m space --focus 4
+cmd + shift - 5 : yabai -m window --space 5; yabai -m space --focus 5
+cmd + shift - 6 : yabai -m window --space 6; yabai -m space --focus 6
+cmd + shift - 7 : yabai -m window --space 7; yabai -m space --focus 7
+cmd + shift - 8 : yabai -m window --space 8; yabai -m space --focus 8
+cmd + shift - 9 : yabai -m window --space 9; yabai -m space --focus 9
+cmd + shift - 0 : yabai -m window --space 10; yabai -m space --focus 10
 
-shift + alt - space : yabai -m window --toggle float; yabai -m window --toggle border
-alt - f             : yabai -m window --toggle zoom-fullscreen
-shift + alt - f     : yabai -m window --toggle native-fullscreen
+# throw focused window to display
+alt + shift - 1 : yabai -m window --display 1; yabai -m display --focus 1
+alt + shift - 2 : yabai -m window --display 2; yabai -m display --focus 2
 
-shift + lctrl + alt - r : /usr/bin/env osascript <<< "display notification \"Restarting Yabai\" with title \"Yabai\""; launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+# make a window fullscreen
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+# rotate tree
+alt - r : yabai -m space --rotate 90
