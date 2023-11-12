@@ -11,6 +11,9 @@
 
 ### sketchybar config
 
+Install this font https://developer.apple.com/sf-symbols/
+Move the font file to `~/Library/Fonts/`
+
 <img width="1478" alt="Screenshot 2023-09-04 at 22 11 18" src="https://github.com/mvritz/dotfiles/assets/108946710/6efc8f59-883a-40ca-b442-6f27bf3ba64c">
 
 features:
