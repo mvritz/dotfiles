@@ -7,6 +7,9 @@
 This repository contains my personal configuration files and setups, ensuring a consistent and efficient work environment across machines. It's especially curated for those who appreciate an optimized and visually appealing desktop experience.
 
 ## Tools and Configurations
+Install this font https://developer.apple.com/sf-symbols/ and move the font file to `~/Library/Fonts/`
+
+<img width="1478" alt="Screenshot 2023-09-04 at 22 11 18" src="https://github.com/mvritz/dotfiles/assets/108946710/6efc8f59-883a-40ca-b442-6f27bf3ba64c">
 
 Here's a list of the primary tools and applications I use to maintain and enhance my setup:
 
