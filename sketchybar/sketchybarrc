@@ -22,13 +22,13 @@ bar=(
   margin=5
   corner_radius=10
   position=top
-  color=$TRANSPARENT
-  border_color=$PURPLE
+  color="$TRANSPARENT"
+  border_color="$PURPLE"
   y_offset=4
   sticky=off
 )
 
-sketchybar --bar "${bar[@]}"
+sketchybar --bar "${bar[@]!}"
 
 defaults=(
   updates=when_shown
@@ -45,7 +45,7 @@ defaults=(
   popup.blur_radius=100
 )
 
-sketchybar --default "${defaults[@]}"
+sketchybar --default "${defaults[@]!}"
 
 time=(
   update_freq=1
@@ -63,7 +63,7 @@ time=(
 )
 
 sketchybar --add item time right \
-  --set time "${time[@]}" \
+  --set time "${time[@]!}" \
   --subscribe time system_woke
 
 date=(
@@ -77,7 +77,7 @@ date=(
 )
 
 sketchybar --add item date right \
-  --set date "${date[@]}" \
+  --set date "${date[@]!}" \
   --subscribe date system_woke
 
 wifi=(
@@ -90,7 +90,7 @@ wifi=(
 rm -f /tmp/sketchybar_speed
 rm -f /tmp/sketchybar_wifi
 sketchybar --add item wifi right \
-  --set wifi "${wifi[@]}" \
+  --set wifi "${wifi[@]!}" \
   --subscribe wifi system_woke
 
 battery=(
@@ -102,7 +102,7 @@ battery=(
 )
 
 sketchybar --add item battery right \
-  --set battery "${battery[@]}" \
+  --set battery "${battery[@]!}" \
   --subscribe battery power_source_change system_woke
 
 volume=(
@@ -129,7 +129,7 @@ volume=(
 )
 
 sketchybar --add slider volume right \
-  --set volume "${volume[@]}" \
+  --set volume "${volume[@]!}" \
   --subscribe volume volume_change mouse.clicked mouse.entered mouse.exited
 
 volume_icon=(
@@ -140,24 +140,23 @@ volume_icon=(
 )
 
 sketchybar --add item volume_icon right \
-  --set volume_icon "${volume_icon[@]}"
+  --set volume_icon "${volume_icon[@]!}"
 
-mail=(
+restart=(
   background.color=$MIDNIGHT
   background.height=25
   background.corner_radius=10
   background.padding_right=10
   background.border_color=$PURPLE
   background.border_width=3
-  script="$PLUGIN_DIR/mail.sh"
-  click_script="$POPUP_CLICK_SCRIPT"
+  icon=$RESTART
   icon.padding_left=15
   icon.padding_right=15
   update_freq=60
 )
 
-sketchybar --add item mail right \
-  --set mail "${mail[@]}"
+sketchybar --add item restart right \
+  --set restart "${restart[@]!}"
 
 spotify=(
   click_script="$POPUP_CLICK_SCRIPT"
@@ -178,7 +177,7 @@ spotify=(
 
 sketchybar --add event spotify_change $SPOTIFY_EVENT \
   --add item spotify e \
-  --set spotify "${spotify[@]}" \
+  --set spotify "${spotify[@]!}" \
   --subscribe spotify mouse.entered mouse.exited \
   mouse.exited.global
 
@@ -187,12 +186,16 @@ spotify_label=(
   label.padding_left=10
   label.padding_right=15
   label.font="SF Pro:Bold:9.0"
+  label.width=100
+  label.drawing=on
   script="$PLUGIN_DIR/spotify.sh"
   update_freq=5
+  background.padding_right=3
+  width=0
 )
 
 sketchybar --add item spotify_label e \
-  --set spotify_label "${spotify_label[@]}"
+  --set spotify_label "${spotify_label[@]!}"
 
 ram=(
   icon=$RAM
@@ -210,7 +213,7 @@ ram=(
 )
 
 sketchybar --add item ram q \
-  --set ram "${ram[@]}"
+  --set ram "${ram[@]!}"
 
 cpu=(
   icon=$CPU
@@ -222,7 +225,7 @@ cpu=(
 )
 
 sketchybar --add item cpu q \
-  --set cpu "${cpu[@]}"
+  --set cpu "${cpu[@]!}"
 
 apple=(
   script="$PLUGIN_DIR/apple.sh"
@@ -238,7 +241,7 @@ apple=(
 )
 
 sketchybar --add item apple left \
-  --set apple "${apple[@]}"
+  --set apple "${apple[@]!}"
 
 space=(
   script="$PLUGIN_DIR/spaces.sh"
@@ -275,7 +278,6 @@ for i in "${!SPACE_ICONS[@]}"; do
   if [[ $sid -eq $ACTIVE_SPACE ]]; then
     sketchybar --set space.$sid "${space_bg[@]}"
   fi
-
 done
 
 current_space=(
@@ -287,11 +289,11 @@ current_space=(
   background.border_color=$PURPLE
   background.border_width=3
   background.padding_left=10
-  click_script="$POPUP_CLICK_SCRIPT"
+  click_script="$PLUGIN_DIR/sort.sh"
 )
 
 sketchybar --add item current_space left \
-  --set current_space "${current_space[@]}"
+  --set current_space "${current_space[@]!}"
 
 brackets=(
   background.color=$STATUS
@@ -302,15 +304,17 @@ brackets=(
 )
 
 sketchybar --add bracket status time date wifi battery volume_icon right \
-  --set status "${brackets[@]}"
+  --set status "${brackets[@]!}"
 
 sketchybar --add bracket music spotify spotify_label e \
-  --set music "${brackets[@]}"
+  --set music "${brackets[@]!}" \
+  background.padding_right=50
 
-sketchybar --add bracket control apple "${spacesArray[@]}" center \
-  --set control "${brackets[@]}"
+sketchybar --add bracket control apple "${spacesArray[@]!}" center \
+  --set control "${brackets[@]!}"
 
 sketchybar --add bracket utilis ram cpu q \
-  --set utilis "${brackets[@]}"
+  --set utilis "${brackets[@]!}" \
+  background.padding_left=50
 
 sketchybar --update

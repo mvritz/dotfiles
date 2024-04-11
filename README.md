@@ -1,19 +1,26 @@
-# dotfiles 
+# Dotfiles Repository
 
-<img width="1512" alt="Screenshot 2023-09-04 at 22 07 15" src="https://github.com/mvritz/dotfiles/assets/108946710/7e6d3e8b-f274-4e8d-bfe5-1afc230be03e">
+![Main Setup](https://github.com/mvritz/dotfiles/assets/108946710/7e6d3e8b-f274-4e8d-bfe5-1afc230be03e)
 
-## What I am using
-- cDock
-- IconChamp
-- yabai
-- skhd
-- sketchybar
+## Overview
 
-### sketchybar config
+This repository contains my personal configuration files and setups, ensuring a consistent and efficient work environment across machines. It's especially curated for those who appreciate an optimized and visually appealing desktop experience.
 
-<img width="1478" alt="Screenshot 2023-09-04 at 22 11 18" src="https://github.com/mvritz/dotfiles/assets/108946710/6efc8f59-883a-40ca-b442-6f27bf3ba64c">
+## Tools and Configurations
 
-features:
+Here's a list of the primary tools and applications I use to maintain and enhance my setup:
 
-<img width="1478" alt="Screenshot 2023-09-04 at 22 12 29" src="https://github.com/mvritz/dotfiles/assets/108946710/86300df3-f957-4973-a5c1-8949f0258324">
+- **cDock**: A versatile tool to customize the MacOS dock.
+- **IconChamp**: Used for refining and personalizing application icons.
+- **yabai**: A window manager that allows for organized and efficient multitasking.
+- **skhd**: Keyboard daemon for hotkey management.
+- **sketchybar**: A status bar customization tool.
+
+### SketchyBar Configuration
+
+![SketchyBar Setup](https://github.com/mvritz/dotfiles/assets/108946710/6efc8f59-883a-40ca-b442-6f27bf3ba64c)
+
+#### Key Features
+
+![Features Preview](https://github.com/mvritz/dotfiles/assets/108946710/86300df3-f957-4973-a5c1-8949f0258324)
 

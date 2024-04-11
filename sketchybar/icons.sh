@@ -47,3 +47,4 @@ export RAM=􀫦
 export MAIL=􀍕
 export MAIL_UNREAD=􀍛
 export GENERAL=􀣋
+export RESTART=􀅉
