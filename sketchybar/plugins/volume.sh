@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 source "$HOME/.config/sketchybar/icons.sh"
 
@@ -22,14 +22,14 @@ volume_change() {
   *) ICON=$VOLUME_100 ;;
   esac
 
-  sketchybar --set volume_icon label=$ICON
+  sketchybar --set volume_icon label="$ICON"
 
-  sketchybar --set $NAME slider.percentage=$INFO \
-    --animate tanh 30 --set $NAME slider.width=100
+  sketchybar --set "$NAME" slider.percentage="$INFO" \
+    --animate tanh 30 --set "$NAME" slider.width=100
 
   sleep 2
 
-  FINAL_PERCENTAGE=$(sketchybar --query $NAME | jq -r ".slider.percentage")
+  FINAL_PERCENTAGE=$(sketchybar --query "$NAME" | jq -r ".slider.percentage")
   if [ "$FINAL_PERCENTAGE" -eq "$INFO" ]; then
     sketchybar --animate tanh 30 --set $NAME slider.width=0
   fi

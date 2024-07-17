@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export WIFI=􀙇
 export WIFI_NO_INTERNET=􀙥
@@ -20,8 +20,8 @@ export NETWORK=􀤆
 export SPEED=􀍾
 export IP=􀅴
 export APPLE=􀣺
-export TIME=􀐫 
-export DOT=􁹧
+export TIME=􀐫
+export DOT=􀀀
 export PACMAN=󰮯
 export GHOST=󰊠
 export WORK=􁹛
@@ -47,4 +47,15 @@ export RAM=􀫦
 export MAIL=􀍕
 export MAIL_UNREAD=􀍛
 export GENERAL=􀣋
-export RESTART=􀅉
+export THUNDERSTORM=􀇞
+export DRIZZLE=􀇄
+export RAIN=􀇆
+export SNOW=􀇎
+export ATMOSPHERE=􀇊
+export CLEAR=􀆭
+export CLEAR_NIGHT=􀆹
+export CLOUDS=􀇢
+export CLOUDS_LIGHT=􀇔
+export CLOUDS_LIGHT_NIGHT=􀇚
+export WEATHER_UNAVAILABLE=􀌑
+export TEMPERATURE=􀇬

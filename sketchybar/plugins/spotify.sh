@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
@@ -7,10 +7,7 @@ CURRENT_SONG=$(osascript -e 'tell application "Spotify" to return name of curren
 CURRENT_ARTIST=$(osascript -e 'tell application "Spotify" to return artist of current track')
 CURRENT_ALBUM=$(osascript -e 'tell application "Spotify" to return album of current track')
 CURRENT_COVER=$(osascript -e 'tell application "Spotify" to return artwork url of current track')
-DURATION_MS=$(osascript -e 'tell application "Spotify" to get duration of current track')
-DURATION=$((DURATION_MS / 1000))
-FLOAT="$(osascript -e 'tell application "Spotify" to get player position')"
-TIME=${FLOAT%.*}
+WIDTH=$(((${#CURRENT_SONG} * 10) + 10))
 
 curl -s --max-time 20 "$CURRENT_COVER" -o /tmp/cover.jpg
 

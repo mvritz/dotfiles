@@ -1,21 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 
 #                      _ _
 #                     (_) |
 #  _ __ _____   ___ __ _| |_ ____           github:     https://github.com/mvritz
 # | '_ ` _ \ \ / / '__| | __|_  /           twitter:    https://twitter.com/meshtonight
-# | | | | | \ V /| |  | | |_ / /            instagram:  https://instagram.com/mo.drs
+# | | | | | \ V /| |  | | |_ / /            website:    https://moriware.com
 # |_| |_| |_|\_/ |_|  |_|\__/___|
 #
 
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
+source "$HOME/.config/sketchybar/environment.sh"
 
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
 ACTIVE_SPACE=$(yabai -m query --spaces --space | jq '.index')
-SPACE_ICONS=("$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST" "$GHOST")
 
 bar=(
   height=30
@@ -34,15 +34,15 @@ defaults=(
   updates=when_shown
   icon.drawing=on
   icon.font="SF Pro:Regular:12.0"
-  icon.color=$WHITE
+  icon.color="$WHITE"
   label.font="SF Pro:Regular:12.0"
   label.drawing=on
-  label.color=$WHITE
-  popup.background.color=$BLUE
+  label.color="$WHITE"
+  popup.background.color="$BLUE"
   popup.background.corner_radius=10
   popup.background.border_width=3
-  popup.background.border_color=$PURPLE
-  popup.blur_radius=100
+  popup.background.border_color="$PURPLE"
+  popup.blur_radius=50
 )
 
 sketchybar --default "${defaults[@]!}"
@@ -55,11 +55,11 @@ time=(
   label.padding_left=20
   label.padding_right=15
   background.corner_radius=10
-  background.color=$TEMPUS
+  background.color="$TEMPUS"
   background.height=19
   background.padding_left=-10
   background.padding_right=3
-  background.border_color=$PURPLE
+  background.border_color="$PURPLE"
 )
 
 sketchybar --add item time right \
@@ -71,7 +71,7 @@ date=(
   script="$PLUGIN_DIR/date.sh"
   click_script="$POPUP_CLICK_SCRIPT"
   label.padding_left=15
-  background.color=$TEMPUS
+  background.color="$TEMPUS"
   background.height=19
   background.corner_radius=10
 )
@@ -87,7 +87,6 @@ wifi=(
   update_freq=60
 )
 
-rm -f /tmp/sketchybar_speed
 rm -f /tmp/sketchybar_wifi
 sketchybar --add item wifi right \
   --set wifi "${wifi[@]!}" \
@@ -110,21 +109,21 @@ volume=(
   updates=on
   label.drawing=off
   icon.drawing=off
-  slider.highlight_color=$PURPLE
+  slider.highlight_color="$PURPLE"
   slider.background.height=5
   slider.background.corner_radius=3
-  slider.background.color=$GREY
-  slider.knob=$DOT
+  slider.background.color="$GREY"
+  slider.knob="$DOT"
   slider.knob.drawing=off
   slider.padding_left=15
   slider.padding_right=15
   label.padding_right=10
   label.padding_left=10
-  background.color=$STATUS
+  background.color="$STATUS"
   background.height=10
   background.corner_radius=10
   background.border_width=2
-  background.border_color=$PURPLE
+  background.border_color="$PURPLE"
   background.padding_right=7
 )
 
@@ -142,31 +141,32 @@ volume_icon=(
 sketchybar --add item volume_icon right \
   --set volume_icon "${volume_icon[@]!}"
 
-restart=(
-  background.color=$MIDNIGHT
+weather=(
+  background.color="$MIDNIGHT"
   background.height=25
   background.corner_radius=10
   background.padding_right=10
-  background.border_color=$PURPLE
+  background.border_color="$PURPLE"
   background.border_width=3
-  icon=$RESTART
   icon.padding_left=15
   icon.padding_right=15
-  update_freq=60
+  update_freq=900
+  script="$PLUGIN_DIR/weather.sh"
+  click_script="$POPUP_CLICK_SCRIPT"
 )
 
-sketchybar --add item restart right \
-  --set restart "${restart[@]!}"
+sketchybar --add item weather right \
+  --set weather "${weather[@]!}"
 
 spotify=(
   click_script="$POPUP_CLICK_SCRIPT"
   popup.horizontal=on
   popup.align=center
   popup.height=100
-  icon=$SPOTIFY
+  icon="$SPOTIFY"
   icon.padding_right=15
   icon.padding_left=15
-  background.color=$TEMPUS
+  background.color="$TEMPUS"
   background.height=19
   background.corner_radius=10
   background.padding_left=3
@@ -176,17 +176,16 @@ spotify=(
 )
 
 sketchybar --add event spotify_change $SPOTIFY_EVENT \
-  --add item spotify e \
-  --set spotify "${spotify[@]!}" \
-  --subscribe spotify mouse.entered mouse.exited \
-  mouse.exited.global
+    --add item spotify e \
+    --set spotify "${spotify[@]!}" \
+    --subscribe spotify mouse.entered mouse.exited \
+    mouse.exited.global
 
 spotify_label=(
   label="Spotify"
-  label.padding_left=10
-  label.padding_right=15
+  label.padding_left=6
+  label.padding_right=13
   label.font="SF Pro:Bold:9.0"
-  label.width=100
   label.drawing=on
   script="$PLUGIN_DIR/spotify.sh"
   update_freq=5
@@ -198,25 +197,25 @@ sketchybar --add item spotify_label e \
   --set spotify_label "${spotify_label[@]!}"
 
 ram=(
-  icon=$RAM
+  icon="$RAM"
   icon.padding_left=15
   script="$PLUGIN_DIR/ram.sh"
   label.padding_right=15
   label.padding_left=10
   update_freq=60
   background.corner_radius=10
-  background.color=$TEMPUS
+  background.color="$TEMPUS"
   background.height=19
   background.padding_left=-6
   background.padding_right=3
-  background.border_color=$PURPLE
+  background.border_color="$PURPLE"
 )
 
 sketchybar --add item ram q \
   --set ram "${ram[@]!}"
 
 cpu=(
-  icon=$CPU
+  icon="$CPU"
   icon.padding_left=15
   script="$PLUGIN_DIR/cpu.sh"
   label.padding_left=10
@@ -230,10 +229,10 @@ sketchybar --add item cpu q \
 apple=(
   script="$PLUGIN_DIR/apple.sh"
   click_script="$POPUP_CLICK_SCRIPT"
-  label=$APPLE
+  label="$APPLE"
   label.padding_right=15
   label.padding_left=15
-  background.color=$TEMPUS
+  background.color="$TEMPUS"
   background.height=19
   background.corner_radius=10
   background.padding_left=3
@@ -252,19 +251,19 @@ space=(
 )
 
 space_bg=(
-  background.color=$SPACEBG
+  background.color="$SPACEBG"
   background.height=19
   background.corner_radius=50
 )
 
 declare -a spacesArray=()
-for i in "${!SPACE_ICONS[@]}"; do
+for i in "${!SPACE_GHOSTS[@]}"; do
   sid=$(($i + 1))
 
   if [[ $sid -eq $ACTIVE_SPACE ]]; then
     CURRENT_ICON=$PACMAN
   else
-    CURRENT_ICON=${SPACE_ICONS["$i"]}
+    CURRENT_ICON=${SPACE_GHOSTS["$i"]}
   fi
 
   spacesArray+=("space.$sid")
@@ -283,10 +282,10 @@ done
 current_space=(
   icon.padding_left=15
   icon.padding_right=15
-  background.color=$MIDNIGHT
+  background.color="$MIDNIGHT"
   background.height=25
   background.corner_radius=10
-  background.border_color=$PURPLE
+  background.border_color="$PURPLE"
   background.border_width=3
   background.padding_left=10
   click_script="$PLUGIN_DIR/sort.sh"
@@ -296,10 +295,10 @@ sketchybar --add item current_space left \
   --set current_space "${current_space[@]!}"
 
 brackets=(
-  background.color=$STATUS
+  background.color="$STATUS"
   background.height=25
   background.corner_radius=10
-  background.border_color=$PURPLE
+  background.border_color="$PURPLE"
   background.border_width=3
 )
 
@@ -307,14 +306,15 @@ sketchybar --add bracket status time date wifi battery volume_icon right \
   --set status "${brackets[@]!}"
 
 sketchybar --add bracket music spotify spotify_label e \
-  --set music "${brackets[@]!}" \
-  background.padding_right=50
-
-sketchybar --add bracket control apple "${spacesArray[@]!}" center \
-  --set control "${brackets[@]!}"
+   --set music "${brackets[@]!}" \
+   background.padding_right=50
 
 sketchybar --add bracket utilis ram cpu q \
   --set utilis "${brackets[@]!}" \
   background.padding_left=50
+
+sketchybar --add bracket control apple "${spacesArray[@]!}" center \
+  --set control "${brackets[@]!}"
+
 
 sketchybar --update

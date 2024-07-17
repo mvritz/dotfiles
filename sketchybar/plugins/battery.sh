@@ -1,14 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
 PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
 CHARGING=$(pmset -g batt | grep 'AC Power')
-POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
 
 batt() {
-  if [ $PERCENTAGE = "" ]; then
+  if [ "$PERCENTAGE" = "" ]; then
     exit 0
   fi
 
@@ -32,7 +31,7 @@ batt() {
     ICON="$BATTERY_LOADING"
   fi
 
-  sketchybar --set $NAME icon="$ICON"
+  sketchybar --set "$NAME" icon="$ICON"
 }
 
 if [ "$(pmset -g batt | grep "Battery")" != "" ]; then
@@ -43,7 +42,7 @@ else
 fi
 
 battery_popup=(
-  icon=$ICON
+  icon="$ICON"
   icon.padding_left=10
   label="$PERCENTAGE %"
   label.y_offset=0
