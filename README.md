@@ -1,29 +1,19 @@
-# Dotfiles Repository
-
-![Main Setup](https://github.com/mvritz/dotfiles/assets/108946710/7e6d3e8b-f274-4e8d-bfe5-1afc230be03e)
-
-## Overview
-
-This repository contains my personal configuration files and setups, ensuring a consistent and efficient work environment across machines. It's especially curated for those who appreciate an optimized and visually appealing desktop experience.
-
-## Tools and Configurations
-Install this font https://developer.apple.com/sf-symbols/ and move the font file to `~/Library/Fonts/`
-
-<img width="1478" alt="Screenshot 2023-09-04 at 22 11 18" src="https://github.com/mvritz/dotfiles/assets/108946710/6efc8f59-883a-40ca-b442-6f27bf3ba64c">
-
-Here's a list of the primary tools and applications I use to maintain and enhance my setup:
-
-- **cDock**: A versatile tool to customize the MacOS dock.
-- **IconChamp**: Used for refining and personalizing application icons.
-- **yabai**: A window manager that allows for organized and efficient multitasking.
-- **skhd**: Keyboard daemon for hotkey management.
-- **sketchybar**: A status bar customization tool.
-
-### SketchyBar Configuration
-
-![SketchyBar Setup](https://github.com/mvritz/dotfiles/assets/108946710/6efc8f59-883a-40ca-b442-6f27bf3ba64c)
-
-#### Key Features
-
-![Features Preview](https://github.com/mvritz/dotfiles/assets/108946710/86300df3-f957-4973-a5c1-8949f0258324)
+<p align="center">
+  <img src="assets/dotfiles.png" alt="Banner">
+</p>
+<p align="center">
+  <b>The most efficient and most beautiful mac setup.</b>
+</p>
+<p align="center">
+  <a href="https://github.com/FelixKratz/SketchyBar">
+    <img src="https://img.shields.io/badge/sketchybar-BB96F8" alt="sketchybar badge">
+  </a>
+  <a href="/github.com/koekeishiya/yabai">
+    <img src="https://img.shields.io/badge/yabai-BB96F8" alt="yabai badge">
+  </a>
+  <a href="/github.com/koekeishiya/skhd">
+    <img src="https://img.shields.io/badge/skhd-BB96F8" alt="skhd badge">
+  </a>
+  <img src="https://img.shields.io/badge/mac--setup-BB96F8" alt="skhd badge">
+</p>
 
