@@ -20,3 +20,6 @@ alt - r : yabai -m space --rotate 90
 
 # restart yabai
 alt - a : yabai --restart-service
+
+# reload sketchybar
+alt - s : brew services restart sketchybar
