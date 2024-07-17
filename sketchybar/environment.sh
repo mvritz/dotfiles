@@ -3,7 +3,7 @@
 source "$HOME/.config/sketchybar/icons.sh"
 
 # you can get the weather api key from https://openweathermap.org/api
-WEATHER_API_KEY=""
+WEATHER_API_KEY="YOUR_API_KEY"
 
 # change the spaces in the order you want them to be displayed or add / remove spaces
 # to add icons add them to the icons.sh file
