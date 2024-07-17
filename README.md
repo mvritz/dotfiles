@@ -48,6 +48,8 @@ To run all the features of Sketchybar you need to install the following dependen
 - [yabai](https://github.com/koekeishiya/yabai)
 - [jq](https://jqlang.github.io/jq/) (`brew install jq`)
 - [This shortcut](https://www.icloud.com/shortcuts/faa5f880cf19481984e9cef20c225a58)
+- [SF Pro](https://developer.apple.com/fonts/)
+- [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
 
 Use this sketchybar configuration by running the following commands:
 
