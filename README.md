@@ -22,7 +22,7 @@
 ## Setup
 
 <p align="center">
-  <img src="assets/sketchybar/preview.png" alt="preview" style="border: 2px solid #000; border-radius: 10px;" />
+  <img src="assets/sketchybar/preview.png" alt="preview" />
 </p>
 
 - [Sketchybar](#sketchybar)
@@ -37,8 +37,8 @@
 ## Sketchybar
 
 <p align="center">
-  <img src="assets/sketchybar/sketchybar.png" alt="preview" style="border-radius: 3px;" />
-  <img src="assets/sketchybar/sketchybar-nodge.png" alt="preview-notch" style="border: 2px solid #000; border-radius: 10px;" />
+  <img src="assets/sketchybar/sketchybar.png" alt="preview" />
+  <img src="assets/sketchybar/sketchybar-nodge.png" alt="preview-notch" />
 </p>
 
 ### Installation and Setup
