@@ -10,18 +10,14 @@ config=(
   window_zoom_persist on
   window_topmost off
   window_shadow on
-  window_animation_frame_rate 120
-  window_animation_duration 0.2
-  window_opacity_duration 0.0
+  window_animation_frame_rate 180
+  window_animation_duration 0.3
+  window_animation_easing
+  window_opacity_duration 0.11
   active_window_opacity 1.0
-  normal_window_opacity 0.90
+  normal_window_opacity 0.94
   window_opacity off
   insert_feedback_color 0xffd75f5f
-  window_border_width 4
-  window_border_radius 12
-  window_border_blur off
-  window_border_hidpi on
-  window_border on
   split_ratio 0.50
   split_type auto
   auto_balance on
@@ -35,13 +31,13 @@ config=(
   mouse_action1 move
   mouse_action2 resize
   mouse_drop_action swap
-  active_window_border_color 0xFFC099FF
-  normal_window_border_color 0xFF444A73
 )
 
 yabai -m config ${config[@]}
 
-sudo yabai --load-sa
+borders active_color=0xFFC099FF inactive_color=0xFF444A73 width=5.0 &
+
+yabai --load-sa
 
 if [[ $MAIN_DISPLAY = "Built-in" ]]; then
     yabai -m config external_bar main:5:0
@@ -49,17 +45,13 @@ else
     yabai -m config external_bar main:30:0
 fi
 
-rules=(
-  app="^System Settings" sticky=on layer=above manage=off
-  app="^Finder" sticky=on layer=above manage=off
-  app="^WhatsApp" sticky=on layer=above manage=off
-  app="^Facetime" sticky=on layer=above manage=off
-  app="^Raycast" sticky=on layer=above manage=off
-  app="^Music" sticky=on layer=above manage=off
-  app="^Reminders" sticky=on layer=above manage=off
-)
-
-yabai -m rule --add ${rules[@]}
+yabai -m rule --add app="^System Settings" sticky=on manage=off
+yabai -m rule --add app="^Finder" sticky=on manage=off
+yabai -m rule --add app="^WhatsApp" sticky=on manage=off
+yabai -m rule --add app="^Facetime" sticky=on manage=off
+yabai -m rule --add app="^Raycast" sticky=on manage=off
+yabai -m rule --add app="^Music" sticky=on manage=off
+yabai -m rule --add app="^Reminders" sticky=on manage=off
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m signal --add event=space_changed action="/Users/moritzdresch/.config/sketchybar/plugins/spaces.sh"
