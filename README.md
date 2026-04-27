@@ -6,15 +6,15 @@
 </p>
 <p align="center">
   <a href="https://github.com/FelixKratz/SketchyBar">
-    <img src="https://img.shields.io/badge/SketchyBar-tokyo-1a1b26?style=for-the-badge" alt="SketchyBar">
-  </a>
-  <a href="https://github.com/kovidgoyal/kitty">
-    <img src="https://img.shields.io/badge/kitty-terminal-7aa2f7?style=for-the-badge" alt="kitty">
+    <img src="https://img.shields.io/badge/sketchybar-7aa2f7" alt="sketchybar badge">
   </a>
   <a href="https://github.com/koekeishiya/yabai">
-    <img src="https://img.shields.io/badge/yabai-tiling-bb9af7?style=for-the-badge" alt="yabai">
+    <img src="https://img.shields.io/badge/yabai-bb9af7" alt="yabai badge">
   </a>
-  <img src="https://img.shields.io/badge/macOS-dotfiles-7dcfff?style=for-the-badge" alt="macOS">
+  <a href="https://github.com/koekeishiya/skhd">
+    <img src="https://img.shields.io/badge/skhd-7dcfff" alt="skhd badge">
+  </a>
+  <img src="https://img.shields.io/badge/mac--setup-1a1b26" alt="mac setup badge">
 </p>
 
 # Dotfiles
@@ -30,8 +30,10 @@ This setup uses [kitty](https://github.com/kovidgoyal/kitty), [yabai](https://gi
 ## SketchyBar
 
 <p align="center">
-  <img src="assets/sketchybar.png" alt="SketchyBar" width="45%" />
-  <img src="assets/sketchybar-features.png" alt="SketchyBar features" width="45%" />
+  <img src="assets/sketchybar.png" alt="SketchyBar" />
+</p>
+<p align="center">
+  <img src="assets/sketchybar-features.png" alt="SketchyBar features" />
 </p>
 
 ### Installation
