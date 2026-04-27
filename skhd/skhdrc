@@ -7,6 +7,7 @@ alt - u : yabai -m space --focus 3
 alt - m : yabai -m space --focus 4
 alt - e : yabai -m space --focus 5
 alt - g : yabai -m space --focus 6
+alt - i : yabai -m space --focus 7
 
 # increase or decrease window size
 alt - h : yabai -m window --resize left:-50:0 ; yabai -m window --resize right:-50:0

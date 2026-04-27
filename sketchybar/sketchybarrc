@@ -158,73 +158,73 @@ weather=(
 sketchybar --add item weather right \
   --set weather "${weather[@]!}"
 
-spotify=(
-  click_script="$POPUP_CLICK_SCRIPT"
-  popup.horizontal=on
-  popup.align=center
-  popup.height=100
-  icon="$SPOTIFY"
-  icon.padding_right=15
-  icon.padding_left=15
-  background.color="$TEMPUS"
-  background.height=19
-  background.corner_radius=10
-  background.padding_left=3
-  background.padding_right=3
-  script="$PLUGIN_DIR/spotify.sh"
-  update_freq=5
-)
+#spotify=(
+#  click_script="$POPUP_CLICK_SCRIPT"
+#  popup.horizontal=on
+#  popup.align=center
+#  popup.height=100
+#  icon="$SPOTIFY"
+#  icon.padding_right=15
+#  icon.padding_left=15
+#  background.color="$TEMPUS"
+#  background.height=19
+#  background.corner_radius=10
+#  background.padding_left=3
+#  background.padding_right=3
+#  script="$PLUGIN_DIR/spotify.sh"
+#  update_freq=5
+#)
+#
+#sketchybar --add event spotify_change $SPOTIFY_EVENT \
+#    --add item spotify e \
+#    --set spotify "${spotify[@]!}" \
+#    --subscribe spotify mouse.entered mouse.exited \
+#    mouse.exited.global
+#
+#spotify_label=(
+#  label="Spotify"
+#  label.padding_left=6
+#  label.padding_right=13
+#  label.font="SF Pro:Bold:9.0"
+#  label.drawing=on
+#  script="$PLUGIN_DIR/spotify.sh"
+#  update_freq=5
+#  background.padding_right=3
+#  width=0
+#)
+#
+#sketchybar --add item spotify_label e \
+#  --set spotify_label "${spotify_label[@]!}"
 
-sketchybar --add event spotify_change $SPOTIFY_EVENT \
-    --add item spotify e \
-    --set spotify "${spotify[@]!}" \
-    --subscribe spotify mouse.entered mouse.exited \
-    mouse.exited.global
-
-spotify_label=(
-  label="Spotify"
-  label.padding_left=6
-  label.padding_right=13
-  label.font="SF Pro:Bold:9.0"
-  label.drawing=on
-  script="$PLUGIN_DIR/spotify.sh"
-  update_freq=5
-  background.padding_right=3
-  width=0
-)
-
-sketchybar --add item spotify_label e \
-  --set spotify_label "${spotify_label[@]!}"
-
-ram=(
-  icon="$RAM"
-  icon.padding_left=15
-  script="$PLUGIN_DIR/ram.sh"
-  label.padding_right=15
-  label.padding_left=10
-  update_freq=60
-  background.corner_radius=10
-  background.color="$TEMPUS"
-  background.height=19
-  background.padding_left=-6
-  background.padding_right=3
-  background.border_color="$PURPLE"
-)
-
-sketchybar --add item ram q \
-  --set ram "${ram[@]!}"
-
-cpu=(
-  icon="$CPU"
-  icon.padding_left=15
-  script="$PLUGIN_DIR/cpu.sh"
-  label.padding_left=10
-  label.padding_right=15
-  update_freq=60
-)
-
-sketchybar --add item cpu q \
-  --set cpu "${cpu[@]!}"
+#ram=(
+#  icon="$RAM"
+#  icon.padding_left=15
+#  script="$PLUGIN_DIR/ram.sh"
+#  label.padding_right=15
+#  label.padding_left=10
+#  update_freq=60
+#  background.corner_radius=10
+#  background.color="$TEMPUS"
+#  background.height=19
+#  background.padding_left=-6
+#  background.padding_right=3
+#  background.border_color="$PURPLE"
+#)
+#
+#sketchybar --add item ram q \
+#  --set ram "${ram[@]!}"
+#
+#cpu=(
+#  icon="$CPU"
+#  icon.padding_left=15
+#  script="$PLUGIN_DIR/cpu.sh"
+#  label.padding_left=10
+#  label.padding_right=15
+#  update_freq=60
+#)
+#
+#sketchybar --add item cpu q \
+#  --set cpu "${cpu[@]!}"
 
 apple=(
   script="$PLUGIN_DIR/apple.sh"
@@ -253,7 +253,7 @@ space=(
 space_bg=(
   background.color="$SPACEBG"
   background.height=19
-  background.corner_radius=50
+  background.corner_radius=10
 )
 
 declare -a spacesArray=()
@@ -305,13 +305,13 @@ brackets=(
 sketchybar --add bracket status time date wifi battery volume_icon right \
   --set status "${brackets[@]!}"
 
-sketchybar --add bracket music spotify spotify_label e \
-   --set music "${brackets[@]!}" \
-   background.padding_right=50
+#sketchybar --add bracket music spotify spotify_label e \
+#   --set music "${brackets[@]!}" \
+#   background.padding_right=50
 
-sketchybar --add bracket utilis ram cpu q \
-  --set utilis "${brackets[@]!}" \
-  background.padding_left=50
+#sketchybar --add bracket utilis ram cpu q \
+#  --set utilis "${brackets[@]!}" \
+#  background.padding_left=50
 
 sketchybar --add bracket control apple "${spacesArray[@]!}" center \
   --set control "${brackets[@]!}"

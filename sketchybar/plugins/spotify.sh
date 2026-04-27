@@ -12,11 +12,11 @@ WIDTH=$(((${#CURRENT_SONG} * 10) + 10))
 curl -s --max-time 20 "$CURRENT_COVER" -o /tmp/cover.jpg
 
 detail_on() {
-  sketchybar --animate tanh 30 --set spotify_label slider.width=$WIDTH
+  sketchybar --animate sin_in_out 30 --set spotify_label slider.width=$WIDTH opacity=1
 }
 
 detail_off() {
-  sketchybar --animate tanh 30 --set spotify_label slider.width=0
+  sketchybar --animate sin_in_out 30 --set spotify_label slider.width=0 opacity=0
 }
 
 spotify_cover=(
@@ -31,7 +31,8 @@ spotify_cover=(
 )
 
 sketchybar --add item spotify.cover popup.spotify \
-  --set spotify.cover "${spotify_cover[@]}"
+  --set spotify.cover "${spotify_cover[@]}" \
+  --animate sin_in_out 50
 
 spotify_title=(
   label.font="SF Pro:Bold:15.0"
@@ -42,10 +43,12 @@ spotify_title=(
   width=0
   label.font="SF Pro:Bold:15.0"
   y_offset=30
+  opacity=0
 )
 
 sketchybar --add item spotify.title popup.spotify \
-  --set spotify.title "${spotify_title[@]}"
+  --set spotify.title "${spotify_title[@]}" \
+  --animate sin_in_out 30
 
 spotify_artist=(
   icon.drawing=off
@@ -55,10 +58,12 @@ spotify_artist=(
   width=0
   label.font="SF Pro:Regular:14.0"
   label="$CURRENT_ARTIST"
+  opacity=0
 )
 
 sketchybar --add item spotify.artist popup.spotify \
-  --set spotify.artist "${spotify_artist[@]}"
+  --set spotify.artist "${spotify_artist[@]}" \
+  --animate sin_in_out 30
 
 spotify_album=(
   icon.drawing=off
@@ -69,9 +74,11 @@ spotify_album=(
   label.font="SF Pro:Bold:11.0"
   label="$CURRENT_ALBUM"
   background.padding_right=235
+  opacity=0
 )
 
 sketchybar --add item spotify.album popup.spotify \
-  --set spotify.album "${spotify_album[@]}"
+  --set spotify.album "${spotify_album[@]}" \
+  --animate sin_in_out 30
 
 sketchybar --set spotify_label label="$CURRENT_SONG"
