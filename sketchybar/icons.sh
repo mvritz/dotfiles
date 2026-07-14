@@ -61,3 +61,11 @@ export CLOUDS_LIGHT_NIGHT=􀇚
 export WEATHER_UNAVAILABLE=􀌑
 export TEMPERATURE=􀇬
 export IPHONE=􁊮
+
+# Consistent semantic aliases used by popup menus.
+export SETTINGS=􀍟
+export CALENDAR=􀉉
+export SLEEP=$CLEAR_NIGHT
+export ROUTER=$NETWORK
+export HEALTH=􀊴
+export HUMIDITY=$RAIN

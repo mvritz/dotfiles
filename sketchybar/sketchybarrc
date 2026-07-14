@@ -14,8 +14,9 @@ source "$HOME/.config/sketchybar/environment.sh"
 
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
-POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
+POPUP_CLICK_SCRIPT="$PLUGIN_DIR/popup_toggle.sh"
 ACTIVE_SPACE=$(yabai -m query --spaces --space | jq '.index')
+rm -f "${TMPDIR:-/tmp}/sketchybar-pacman/front-context"
 
 bar=(
   height=30
@@ -23,7 +24,7 @@ bar=(
   corner_radius=10
   position=top
   color="$TRANSPARENT"
-  border_color="$PURPLE"
+  border_color="$TOKYO_BORDER"
   y_offset=4
   sticky=off
 )
@@ -38,40 +39,49 @@ defaults=(
   label.font="SF Pro:Regular:12.0"
   label.drawing=on
   label.color="$WHITE"
-  popup.background.color="$BLUE"
+  popup.background.color="$TOKYO_POPUP_BG"
   popup.background.corner_radius=10
-  popup.background.border_width=3
-  popup.background.border_color="$PURPLE"
-  popup.blur_radius=50
+  popup.background.border_width=1
+  popup.background.border_color="$TOKYO_POPUP_BORDER"
+  popup.background.padding_left=7
+  popup.background.padding_right=7
+  popup.background.shadow.drawing=on
+  popup.background.shadow.color="$TOKYO_POPUP_SHADOW"
+  popup.background.shadow.angle=270
+  popup.background.shadow.distance=6
+  popup.blur_radius=36
 )
 
 sketchybar --default "${defaults[@]!}"
+sketchybar --add event window_context_changed
 
 time=(
   update_freq=1
   script="$PLUGIN_DIR/time.sh"
   click_script="$POPUP_CLICK_SCRIPT"
+  popup.align=right
+  popup.height=32
+  popup.y_offset=8
   label.font="SF Pro:Bold:12.0"
   label.padding_left=20
   label.padding_right=15
   background.corner_radius=10
-  background.color="$TEMPUS"
+  background.color="$TOKYO_BG"
   background.height=19
   background.padding_left=-10
   background.padding_right=3
-  background.border_color="$PURPLE"
+  background.border_color="$TOKYO_BORDER"
 )
 
 sketchybar --add item time right \
   --set time "${time[@]!}" \
-  --subscribe time system_woke
+  --subscribe time system_woke mouse.entered mouse.exited
 
 date=(
   update_freq=30
   script="$PLUGIN_DIR/date.sh"
-  click_script="$POPUP_CLICK_SCRIPT"
   label.padding_left=15
-  background.color="$TEMPUS"
+  background.color="$TOKYO_BG"
   background.height=19
   background.corner_radius=10
 )
@@ -83,80 +93,77 @@ sketchybar --add item date right \
 wifi=(
   script="$PLUGIN_DIR/wifi.sh"
   click_script="$POPUP_CLICK_SCRIPT"
-  label.padding_right=15
+  popup.align=center
+  popup.height=32
+  popup.y_offset=8
+  width=33
+  label.width=33
+  label.align=center
+  label.padding_right=0
   update_freq=60
 )
 
 rm -f /tmp/sketchybar_wifi
 sketchybar --add item wifi right \
   --set wifi "${wifi[@]!}" \
-  --subscribe wifi system_woke
+  --subscribe wifi system_woke mouse.entered mouse.exited
 
 battery=(
   script="$PLUGIN_DIR/battery.sh"
   update_freq=120
   updates=on
   click_script="$POPUP_CLICK_SCRIPT"
-  label.padding_left=15
+  popup.align=center
+  popup.height=32
+  popup.y_offset=8
+  width=33
+  icon.width=33
+  icon.align=center
+  label.padding_left=0
 )
 
 sketchybar --add item battery right \
   --set battery "${battery[@]!}" \
-  --subscribe battery power_source_change system_woke
-
-volume=(
-  script="$PLUGIN_DIR/volume.sh"
-  updates=on
-  label.drawing=off
-  icon.drawing=off
-  slider.highlight_color="$PURPLE"
-  slider.background.height=5
-  slider.background.corner_radius=3
-  slider.background.color="$GREY"
-  slider.knob="$DOT"
-  slider.knob.drawing=off
-  slider.padding_left=15
-  slider.padding_right=15
-  label.padding_right=10
-  label.padding_left=10
-  background.color="$STATUS"
-  background.height=10
-  background.corner_radius=10
-  background.border_width=2
-  background.border_color="$PURPLE"
-  background.padding_right=7
-)
-
-sketchybar --add slider volume right \
-  --set volume "${volume[@]!}" \
-  --subscribe volume volume_change mouse.clicked mouse.entered mouse.exited
+  --subscribe battery power_source_change system_woke mouse.entered mouse.exited
 
 volume_icon=(
-  script="$PLUGIN_DIR/volume_icon.sh"
+  script="$PLUGIN_DIR/volume.sh"
   click_script="$PLUGIN_DIR/volume_click.sh"
-  label.padding_right=8
-  label.padding_left=20
+  label="$VOLUME_66"
+  popup.align=center
+  popup.height=32
+  popup.y_offset=8
+  width=33
+  label.width=33
+  label.align=center
+  label.padding_right=0
+  label.padding_left=0
 )
 
 sketchybar --add item volume_icon right \
-  --set volume_icon "${volume_icon[@]!}"
+  --set volume_icon "${volume_icon[@]!}" \
+  --subscribe volume_icon volume_change mouse.entered mouse.exited
 
 weather=(
-  background.color="$MIDNIGHT"
+  background.color="$TOKYO_SURFACE"
   background.height=25
   background.corner_radius=10
   background.padding_right=10
-  background.border_color="$PURPLE"
-  background.border_width=3
+  background.border_color="$TOKYO_BORDER"
+  background.border_width=2
   icon.padding_left=15
   icon.padding_right=15
   update_freq=900
   script="$PLUGIN_DIR/weather.sh"
   click_script="$POPUP_CLICK_SCRIPT"
+  popup.align=center
+  popup.height=34
+  popup.y_offset=8
 )
 
 sketchybar --add item weather right \
-  --set weather "${weather[@]!}"
+  --set weather "${weather[@]!}" \
+  --subscribe weather mouse.entered mouse.exited
 
 #spotify=(
 #  click_script="$POPUP_CLICK_SCRIPT"
@@ -229,10 +236,13 @@ sketchybar --add item weather right \
 apple=(
   script="$PLUGIN_DIR/apple.sh"
   click_script="$POPUP_CLICK_SCRIPT"
+  popup.align=left
+  popup.height=32
+  popup.y_offset=8
   label="$APPLE"
   label.padding_right=15
   label.padding_left=15
-  background.color="$TEMPUS"
+  background.color="$TOKYO_BG"
   background.height=19
   background.corner_radius=10
   background.padding_left=3
@@ -240,20 +250,22 @@ apple=(
 )
 
 sketchybar --add item apple left \
-  --set apple "${apple[@]!}"
+  --set apple "${apple[@]!}" \
+  --subscribe apple mouse.entered mouse.exited
 
 space=(
-  script="$PLUGIN_DIR/spaces.sh"
   label.drawing=off
-  icon.padding_left=15
-  icon.padding_right=15
-  update_freq=1
-)
-
-space_bg=(
-  background.color="$SPACEBG"
-  background.height=19
-  background.corner_radius=10
+  width=30
+  icon.font="SF Pro:Bold:14.0"
+  icon.width=30
+  icon.align=center
+  icon.padding_left=0
+  icon.padding_right=0
+  background.color="$TRANSPARENT"
+  background.height=18
+  background.corner_radius=9
+  background.border_width=1
+  background.border_color="$TRANSPARENT"
 )
 
 declare -a spacesArray=()
@@ -262,44 +274,68 @@ for i in "${!SPACE_GHOSTS[@]}"; do
 
   if [[ $sid -eq $ACTIVE_SPACE ]]; then
     CURRENT_ICON=$PACMAN
+    CURRENT_COLOR=$PACMAN_WHITE
+    CURRENT_BG=$TRANSPARENT
+    CURRENT_BORDER=$TRANSPARENT
   else
     CURRENT_ICON=${SPACE_GHOSTS["$i"]}
+    CURRENT_COLOR=${SPACE_GHOST_COLORS["$i"]}
+    CURRENT_BG=$TRANSPARENT
+    CURRENT_BORDER=$TRANSPARENT
   fi
 
   spacesArray+=("space.$sid")
 
   sketchybar --add space space.$sid left \
-    --set space.$sid associated_space=$sid \
+    --set space.$sid space=$sid \
     icon="$CURRENT_ICON" \
+    icon.color="$CURRENT_COLOR" \
+    background.color="$CURRENT_BG" \
+    background.border_color="$CURRENT_BORDER" \
     click_script="yabai -m space --focus $sid" \
-    "${space[@]}"
-
-  if [[ $sid -eq $ACTIVE_SPACE ]]; then
-    sketchybar --set space.$sid "${space_bg[@]}"
-  fi
+    script="$PLUGIN_DIR/space_hover.sh" \
+    "${space[@]}" \
+    --subscribe "space.$sid" mouse.entered mouse.exited
 done
 
-current_space=(
-  icon.padding_left=15
-  icon.padding_right=15
-  background.color="$MIDNIGHT"
+sketchybar --add item space_animator left \
+  --set space_animator drawing=off updates=on script="$PLUGIN_DIR/spaces.sh" \
+  --subscribe space_animator space_change
+
+front_app=(
+  script="$PLUGIN_DIR/front_app.sh"
+  update_freq=5
+  updates=on
+  scroll_texts=off
+  padding_left=8
+  icon="Desktop"
+  icon.font="SF Pro:Semibold:11.0"
+  icon.color="$TOKYO_BLUE"
+  icon.padding_left=11
+  icon.padding_right=11
+  label=""
+  label.font="SF Pro:Medium:11.0"
+  label.color="$SUBTEXT"
+  label.max_chars=38
+  label.padding_left=0
+  label.padding_right=0
+  background.color="$TOKYO_SURFACE"
   background.height=25
-  background.corner_radius=10
-  background.border_color="$PURPLE"
-  background.border_width=3
-  background.padding_left=10
-  click_script="$PLUGIN_DIR/sort.sh"
+  background.corner_radius=9
+  background.border_color="$TOKYO_BORDER"
+  background.border_width=2
 )
 
-sketchybar --add item current_space left \
-  --set current_space "${current_space[@]!}"
+sketchybar --add item front_app left \
+  --set front_app "${front_app[@]!}" \
+  --subscribe front_app front_app_switched space_change window_context_changed
 
 brackets=(
-  background.color="$STATUS"
+  background.color="$TOKYO_SURFACE"
   background.height=25
   background.corner_radius=10
-  background.border_color="$PURPLE"
-  background.border_width=3
+  background.border_color="$TOKYO_BORDER"
+  background.border_width=2
 )
 
 sketchybar --add bracket status time date wifi battery volume_icon right \

@@ -1,63 +1,33 @@
 #!/bin/bash
 
+source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
+source "$HOME/.config/sketchybar/plugins/bar_hover.sh"
+handle_bar_hover && exit 0
 
-volume_change() {
-  case $INFO in
-  [6-9][0-9] | 100)
-    ICON=$VOLUME
-    ;;
-  [3-5][0-9])
-    ICON=$VOLUME_66
-    ;;
-  [1-2][0-9])
-    ICON=$VOLUME_33
-    ;;
-  [1-9])
-    ICON=$VOLUME_10
-    ;;
-  0)
-    ICON=$VOLUME_0
-    ;;
-  *) ICON=$VOLUME_100 ;;
-  esac
-
-  sketchybar --set volume_icon label="$ICON"
-
-  sketchybar --set "$NAME" slider.percentage="$INFO" \
-    --animate tanh 30 --set "$NAME" slider.width=100
-
-  sleep 2
-
-  FINAL_PERCENTAGE=$(sketchybar --query "$NAME" | jq -r ".slider.percentage")
-  if [ "$FINAL_PERCENTAGE" -eq "$INFO" ]; then
-    sketchybar --animate tanh 30 --set $NAME slider.width=0
+ANIMATION_LOCK="${TMPDIR:-/tmp}/sketchybar-volume/animation-lock"
+if [[ "$SENDER" == "volume_change" && -f "$ANIMATION_LOCK" ]]; then
+  LOCK_AGE=$(( $(/bin/date +%s) - $(/usr/bin/stat -f %m "$ANIMATION_LOCK" 2>/dev/null || printf '0') ))
+  if (( LOCK_AGE < 2 )); then
+    exit 0
   fi
-}
+  rm -f "$ANIMATION_LOCK"
+fi
 
-mouse_clicked() {
-  osascript -e "set volume output volume $PERCENTAGE"
-}
+PERCENTAGE="$INFO"
+if ! [[ "$PERCENTAGE" =~ ^[0-9]+$ ]]; then
+  PERCENTAGE="$(/usr/bin/osascript -e 'output volume of (get volume settings)' 2>/dev/null)"
+fi
+MUTED="$(/usr/bin/osascript -e 'output muted of (get volume settings)' 2>/dev/null)"
 
-mouse_entered() {
-  sketchybar --set $NAME slider.knob.drawing=on
-}
-
-mouse_exited() {
-  sketchybar --set $NAME slider.knob.drawing=off
-}
-
-case "$SENDER" in
-"volume_change")
-  volume_change
-  ;;
-"mouse.clicked")
-  mouse_clicked
-  ;;
-"mouse.entered")
-  mouse_entered
-  ;;
-"mouse.exited")
-  mouse_exited
-  ;;
+case "$MUTED:$PERCENTAGE" in
+  true:*) ICON="$VOLUME_0" ;;
+  false:[6-9][0-9]|false:100) ICON="$VOLUME" ;;
+  false:[3-5][0-9]) ICON="$VOLUME_66" ;;
+  false:[1-2][0-9]) ICON="$VOLUME_33" ;;
+  false:[1-9]) ICON="$VOLUME_10" ;;
+  false:0) ICON="$VOLUME_0" ;;
+  *) ICON="$VOLUME_66" ;;
 esac
+
+sketchybar --set "${NAME:-volume_icon}" label="$ICON"
