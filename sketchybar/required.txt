@@ -1,0 +1,3 @@
+https://www.icloud.com/shortcuts/faa5f880cf19481984e9cef20c225a58
+https://api.openweathermap.org/
+brew install jq
